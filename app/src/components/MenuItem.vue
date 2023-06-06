@@ -1,16 +1,18 @@
 <template>
-    <li v-for="project in projects" :key="project.name" class="col-span-1 flex flex-col rounded-md bg-white shadow-sm p-3">
+    <li class="col-span-1 flex flex-col rounded-md bg-white shadow-sm p-3">
         <div class="w-full flex gap-4">
-            <div :class="[project.bgColor, 'flex w-24 flex-shrink-0 items-center justify-center rounded-md text-sm font-medium text-white']">{{ project.initials }}</div>
+            <div class="flex w-28 h-28 flex-shrink-0 rounded-md">
+                <img :src="menu.imageUrl" class="object-cover w-full h-full rounded-md" :alt="menu.name" />
+            </div>
             <div class="flex-1">
-                <h5 class="font-semibold text-xl text-gray-900 hover:text-gray-600">Cripsy Dory Sambal Matah</h5>
-                <p class="text-gray-500 text-xs mt-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod, fuga!</p>
-				<div class="mt-4">
-					<h5 class="text-gray-800 text-2xl font-bold">
-						<span class="text-base font-semibold text-gray-600">$</span>
-						50.00
-					</h5>
-				</div>
+                <h5 class="font-semibold text-xl text-gray-900 hover:text-gray-600">{{ menu.name }}</h5>
+                <p class="text-gray-500 text-xs mt-2 truncate-text">{{ menu.description }}</p>
+                <div class="mt-4">
+                    <h5 class="text-gray-800 text-2xl font-bold">
+                        <span class="text-base font-semibold text-gray-600">$</span>
+                        {{ menu.price }}
+                    </h5>
+                </div>
             </div>
         </div>
 
@@ -43,20 +45,16 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 import { Switch, SwitchGroup, SwitchLabel } from "@headlessui/vue";
-import PencilSquareIcon from '../asset/PencilSquareIcon.vue'
-import TrashIcon from '../asset/TrashIcon.vue'
+import PencilSquareIcon from "../asset/PencilSquareIcon.vue";
+import TrashIcon from "../asset/TrashIcon.vue";
 // import { TrashIcon, PencilSquareIcon } from "@heroicons/vue/24/outline";
 
-import { IMealDetails } from '../utils/types'
+import { IMealDetails } from "../utils/types";
 
 const isEnabled = ref(false);
 
-// const props = defineProps<IMealDetails>()
+const props = defineProps<{
+    menu: IMealDetails;
+}>();
 
-const projects = [
-    { name: "Graph API", initials: "GA", href: "#", members: 16, bgColor: "bg-pink-600" },
-    { name: "Component Design", initials: "CD", href: "#", members: 12, bgColor: "bg-purple-600" },
-    { name: "Templates", initials: "T", href: "#", members: 16, bgColor: "bg-yellow-500" },
-    { name: "React Components", initials: "RC", href: "#", members: 8, bgColor: "bg-green-500" },
-];
 </script>

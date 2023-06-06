@@ -7,3 +7,13 @@
 <script lang="ts" setup>
 import { RouterView } from 'vue-router'
 </script>
+
+<style>
+.truncate-text {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+</style>

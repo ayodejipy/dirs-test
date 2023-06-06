@@ -8,3 +8,7 @@ export interface IMealDetails {
     waitingTime: string;
     isAvailable: boolean;
 }
+
+export interface MenusByCategory {
+	[key: string]: IMealDetails[]
+}
