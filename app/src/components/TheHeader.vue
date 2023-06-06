@@ -13,9 +13,10 @@ import { storeToRefs } from 'pinia'
 import { useModalStore } from '../store/modal';
 
 const store = useModalStore(); // initialize store
-const { isOpen } = storeToRefs(store); // destructure reactive state
+const { isOpen, action } = storeToRefs(store); // destructure reactive state
 
 function toggleModal() {
+	action.value = 'add'
 	isOpen.value = !isOpen.value
 }
 </script>

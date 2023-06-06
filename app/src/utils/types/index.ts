@@ -7,15 +7,16 @@ export interface IMealDetails {
     price: string;
     waitingTime: string;
 	isAvailable: boolean;
-	_id: string;
+	_id: string | null;
+	_Changed: string | null;
+	_Created: string | null;
+}
+
+export interface MetaData {
+    _id: string;
 	_Changed: string;
 	_Created: string;
 }
-// export interface MetaData {
-//     _id: string;
-// 	_Changed: string;
-// 	_Created: string;
-// }
 
 export interface MenusByCategory {
 	[key: string]: IMealDetails[]

@@ -92,7 +92,7 @@ const mealtimes = ["Breakfast", "Lunch", "Dinner", "Weekdays", "Weekends"];
 const { getMenus, updateMenu, deleteMenu } = useApi();
 const store = useModalStore(); // initialize store
 const { action, form } = storeToRefs(store);
-// const { clearForm } = store
+const { clearForm } = store
 
 const request = reactive({
     loading: false,
@@ -126,4 +126,6 @@ onMounted(() => {
 	request.isError = false
 	request.isSuccess = false
 })
+
+onUnmounted(() => clearForm())
 </script>

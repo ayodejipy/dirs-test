@@ -43,7 +43,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, reactive } from "vue";
+import { ref, reactive, onMounted } from "vue";
 import { useModalStore } from '../store/modal';
 
 
@@ -60,7 +60,7 @@ const props = defineProps<{
 const store = useModalStore(); // initialize store
 const { updateForm, toggleModal } = store
 
-const data = ref(props.menu);
+const data = ref<IMealDetails>(props.menu);
 
 function handleMod(body: IMealDetails, action: string) {
 	// update form and set action type
@@ -71,4 +71,5 @@ function handleMod(body: IMealDetails, action: string) {
 
 }
 
+onMounted(() => console.log('mounted'))
 </script>

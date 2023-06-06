@@ -1,6 +1,29 @@
 <template>
     <TheHeader />
 
+	<section aria-label="Orders list" class="w-full my-16">
+		<div class="flex items-center mb-5">
+			<h5 class="text-gray-700 font-bold text-2xl">Orders list</h5>
+		</div>
+		<ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+			<li v-for="n in 3" :key="n" class="col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow">
+				<div class="flex w-full justify-between space-x-6 p-6">
+					<div class="flex-1 truncate space-y-4">
+						<div class="space-y-1">
+							<h3 class="truncate text-sm font-medium text-gray-900">Pepperoni</h3>
+							<span class="inline-flex py-0.5 text-xs font-medium text-gray-600"> Item 3 &bull; Table 10</span>
+						</div>
+						<span class="inline-flex flex-shrink-0 rounded-full bg-green-50 px-1.5 py-0.5 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+							progress
+						</span>
+					</div>
+					<!-- order id -->
+					<span class="inline-flex flex-shrink-0 text-xs font-semibold text-gray-700">#40912</span>
+				</div>
+			</li>
+		</ul>
+	</section>
+
     <section aria-label="Menu items" class="w-full my-10">
         <div class="flex items-center justify-between">
             <h5 class="text-gray-800 font-bold text-2xl">Menu</h5>
@@ -32,12 +55,12 @@
             </div>
         </template>
 
-        <AddMenuDrawer />
+        <AddMenuDrawer v-if="isOpen" />
     </section>
 </template>
 
 <script lang="ts" setup>
-import { onMounted, watch, ref, provide } from "vue";
+import { onMounted, watch, ref } from "vue";
 import { storeToRefs } from 'pinia'
 import { useModalStore } from '../store/modal';
 import useApi from "../composables/api";
@@ -51,7 +74,7 @@ import AddMenuDrawer from "../components/AddMenuDrawer.vue";
 
 const { getMenus } = useApi();
 const store = useModalStore(); // initialize store
-const { menus } = storeToRefs(store); // initialize store
+const { menus, isOpen } = storeToRefs(store); // initialize store
 const { fetchMenus } = store
 
 const sortedMenus = ref<MenusByCategory>();

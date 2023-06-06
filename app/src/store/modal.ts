@@ -2,7 +2,9 @@ import { defineStore } from 'pinia'
 import { ref, reactive } from 'vue'
 import useApi from "../composables/api";
 
-import { IMealDetails } from '../utils/types';
+import { IMealDetails, MetaData } from '../utils/types';
+
+
 
 export const useModalStore = defineStore('modal', () => {
 	const { getMenus } = useApi();
@@ -17,7 +19,7 @@ export const useModalStore = defineStore('modal', () => {
 		error: null,
 	});
 
-	const form: Partial<IMealDetails> = reactive({
+	const form: IMealDetails = reactive({
 		name: "",
 		imageUrl: "",
 		description: "",
@@ -62,11 +64,11 @@ export const useModalStore = defineStore('modal', () => {
 	}
 
 	function clearForm() {
-		// for (let key in form) {
-		// 	if(key == 'isAvailable') return form[key] = false
-		// 	form[key as typeof form] = "";
-		// }
+		for (let key in form) {
+			if(key == 'isAvailable') return form[key] = false
+			form[key as unknown as typeof IMealDetails] = "";
+		}
 	}
 
-	return { isOpen, action, request, form, menus, updateForm, toggleModal, fetchMenus };
+	return { isOpen, action, request, form, menus, updateForm, clearForm, toggleModal, fetchMenus };
 })
