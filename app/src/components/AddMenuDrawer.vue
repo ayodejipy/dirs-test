@@ -42,6 +42,17 @@
                     <InputField v-model="form.price" type="text" placeholder="price" label="Price" />
                 </div>
 
+				<div>
+					<SwitchGroup as="div" class="flex items-center">
+						<Switch v-model="form.isAvailable" :class="[form.isAvailable ? 'bg-indigo-600' : 'bg-gray-200', 'relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2']">
+							<span aria-hidden="true" :class="[form.isAvailable ? 'translate-x-5' : 'translate-x-0', 'pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out']" />
+						</Switch>
+						<SwitchLabel as="span" class="ml-3 text-sm">
+							<span class="font-medium text-gray-900">Mark as unavailable </span>
+						</SwitchLabel>
+					</SwitchGroup>
+				</div>
+
                 <div class="mt-10">
                     <button type="submit" class="bg-blue-600 text-white hover:bg-blue-700 border-none rounded-none py-3 text-center w-full" :disabled="request.loading">
                         {{ request.loading ? "loading..." : buttonText }}
@@ -57,7 +68,8 @@ import { reactive, onMounted, onUnmounted, computed } from "vue";
 import { storeToRefs } from "pinia";
 import { useModalStore } from "../store/modal";
 
-import { DialogTitle } from "@headlessui/vue";
+
+import { DialogTitle, Switch, SwitchGroup, SwitchLabel } from "@headlessui/vue";
 import AppDrawer from "./base/AppDrawer.vue";
 import InputField from "./base/InputField.vue";
 import TextareaField from "./base/TextareaField.vue";
@@ -77,11 +89,10 @@ const categories: Record<string, string>[] = [
 ];
 const mealtimes = ["Breakfast", "Lunch", "Dinner", "Weekdays", "Weekends"];
 
-const { updateMenu, deleteMenu } = useApi();
+const { getMenus, updateMenu, deleteMenu } = useApi();
 const store = useModalStore(); // initialize store
-const { action } = storeToRefs(store);
+const { action, form } = storeToRefs(store);
 // const { clearForm } = store
-const { form } = store;
 
 const request = reactive({
     loading: false,
@@ -95,10 +106,13 @@ const buttonText = computed(() => (action.value == "add" ? "Create menu" : actio
 async function submitForm() {
     try {
         request.loading = true;
-        const result = action.value == "delete" ? await deleteMenu(form._id!, form) : await updateMenu(form);
-		if (result.status == 200) return (request.isSuccess = true);
-		
-		store.toggleModal() // close modal
+        const result = action.value == "delete" ? await deleteMenu(form.value._id!, form.value) : await updateMenu(form.value);
+		if (result.status == 200)
+			await store.fetchMenus(); // fetch new list to update
+
+			request.isSuccess = true;
+			store.toggleModal() // close modal
+
     } catch (error: any) {
         request.isError = true;
         request.error = error?.message;

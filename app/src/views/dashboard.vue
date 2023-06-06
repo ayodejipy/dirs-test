@@ -51,9 +51,9 @@ import AddMenuDrawer from "../components/AddMenuDrawer.vue";
 
 const { getMenus } = useApi();
 const store = useModalStore(); // initialize store
-const { toggleModal } = store
-const isLoading = ref<boolean>(false);
-const menus = ref<IMealDetails[]>([]);
+const { menus } = storeToRefs(store); // initialize store
+const { fetchMenus } = store
+
 const sortedMenus = ref<MenusByCategory>();
 
 // sort menus by category
@@ -70,21 +70,6 @@ const sortData = (data: IMealDetails[]) => {
         return result;
     }, {});
 };
-
-async function fetchMenus(): Promise<void> {
-	try {
-		isLoading.value = true;
-        const {
-            data: { data: data },
-        } = await getMenus();
-        console.log(data);
-        menus.value = data;
-    } catch (error) {
-		throw new Error("Error: " + error);
-    } finally {
-		isLoading.value = false;
-    }
-}
 
 // watch data on menus and sort menus based off category
 watch(menus, (newValue) => sortData(newValue));
