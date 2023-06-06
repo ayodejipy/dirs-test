@@ -1,7 +1,7 @@
 <template>
     <div class="w-full relative">
         <label :for="label" class="block text-sm font-medium leading-6 text-gray-700">{{ label }}</label>
-        <input :type="type" :value="modelValue" :required="required" :placeholder="placeholder" @input="onChange" class="relative w-full py-3 text-gray-800 border border-gray-400 outline-0 text-xs leading-normal font-normal placeholder:focus:text-transparent placeholder:text-gray-600 bg-transparent focus:border-gray-500" />
+        <input :type="type" :value="modelValue" :required="required" :placeholder="placeholder" @input="onChange" class="relative w-full p-3 text-gray-800 border border-gray-400 outline-0 text-xs leading-normal font-normal placeholder:focus:text-transparent placeholder:text-gray-600 bg-transparent focus:border-gray-500" />
     </div>
 </template>
 
