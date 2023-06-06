@@ -16,8 +16,8 @@ export default function useApi() {
         const response = await axios.put(`${API_URL}/${path}`, data);
         return response;
     }
-    async function deleteMenu(data: Record<string, any>) {
-        const response = await axios.delete(`${API_URL}/${path}`, data);
+    async function deleteMenu(id: string, data: Record<string, any>) {
+        const response = await axios.delete(`${API_URL}/${path}/${id}`, data);
         return response;
     }
 

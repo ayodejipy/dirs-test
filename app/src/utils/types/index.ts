@@ -6,8 +6,16 @@ export interface IMealDetails {
     mealTime: string;
     price: string;
     waitingTime: string;
-    isAvailable: boolean;
+	isAvailable: boolean;
+	_id: string;
+	_Changed: string;
+	_Created: string;
 }
+// export interface MetaData {
+//     _id: string;
+// 	_Changed: string;
+// 	_Created: string;
+// }
 
 export interface MenusByCategory {
 	[key: string]: IMealDetails[]

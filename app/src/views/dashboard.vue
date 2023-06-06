@@ -37,69 +37,24 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, watch, ref } from "vue";
+import { onMounted, watch, ref, provide } from "vue";
+import { storeToRefs } from 'pinia'
+import { useModalStore } from '../store/modal';
+import useApi from "../composables/api";
+import { IMealDetails, MenusByCategory } from "../utils/types";
+
+// components
 import { TabGroup, TabList, Tab, TabPanels, TabPanel } from "@headlessui/vue";
 import TheHeader from "../components/TheHeader.vue";
 import MenuItem from "../components/MenuItem.vue";
 import AddMenuDrawer from "../components/AddMenuDrawer.vue";
-import useApi from "../composables/api";
-import { IMealDetails, MenusByCategory } from "../utils/types";
 
 const { getMenus } = useApi();
+const store = useModalStore(); // initialize store
+const { toggleModal } = store
 const isLoading = ref<boolean>(false);
 const menus = ref<IMealDetails[]>([]);
 const sortedMenus = ref<MenusByCategory>();
-
-const categories = ref({
-    Recent: [
-        {
-            id: 1,
-            title: "Does drinking coffee make you smarter?",
-            date: "5h ago",
-            commentCount: 5,
-            shareCount: 2,
-        },
-        {
-            id: 2,
-            title: "So you've bought coffee... now what?",
-            date: "2h ago",
-            commentCount: 3,
-            shareCount: 2,
-        },
-    ],
-    Popular: [
-        {
-            id: 1,
-            title: "Is tech making coffee better or worse?",
-            date: "Jan 7",
-            commentCount: 29,
-            shareCount: 16,
-        },
-        {
-            id: 2,
-            title: "The most innovative things happening in coffee",
-            date: "Mar 19",
-            commentCount: 24,
-            shareCount: 12,
-        },
-    ],
-    Trending: [
-        {
-            id: 1,
-            title: "Ask Me Anything: 10 answers to your questions about coffee",
-            date: "2d ago",
-            commentCount: 9,
-            shareCount: 5,
-        },
-        {
-            id: 2,
-            title: "The worst advice we've ever heard about coffee",
-            date: "4d ago",
-            commentCount: 1,
-            shareCount: 2,
-        },
-    ],
-});
 
 // sort menus by category
 const sortData = (data: IMealDetails[]) => {
@@ -114,8 +69,6 @@ const sortData = (data: IMealDetails[]) => {
         }
         return result;
     }, {});
-
-    console.log(sortedMenus.value);
 };
 
 async function fetchMenus(): Promise<void> {
@@ -132,7 +85,6 @@ async function fetchMenus(): Promise<void> {
 		isLoading.value = false;
     }
 }
-
 
 // watch data on menus and sort menus based off category
 watch(menus, (newValue) => sortData(newValue));
