@@ -63,7 +63,6 @@
 import { onMounted, watch, ref } from "vue";
 import { storeToRefs } from 'pinia'
 import { useModalStore } from '../store/modal';
-import useApi from "../composables/api";
 import { IMealDetails, MenusByCategory } from "../utils/types";
 
 // components
@@ -72,7 +71,6 @@ import TheHeader from "../components/TheHeader.vue";
 import MenuItem from "../components/MenuItem.vue";
 import AddMenuDrawer from "../components/AddMenuDrawer.vue";
 
-const { getMenus } = useApi();
 const store = useModalStore(); // initialize store
 const { menus, isOpen } = storeToRefs(store); // initialize store
 const { fetchMenus } = store

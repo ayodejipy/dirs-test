@@ -19,7 +19,7 @@ export const useModalStore = defineStore('modal', () => {
 		error: null,
 	});
 
-	const form: IMealDetails = reactive({
+	const form = reactive({
 		name: "",
 		imageUrl: "",
 		description: "",

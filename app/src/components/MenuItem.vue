@@ -1,16 +1,16 @@
 <template>
-    <li class="col-span-1 flex flex-col rounded-md shadow-sm p-3" :class="[data.isAvailable ? 'bg-white' : 'bg-gray-300']">
+    <li class="col-span-1 flex flex-col rounded-md shadow-sm p-3" :class="[data?.isAvailable ? 'bg-white' : 'bg-gray-300']">
         <div class="w-full flex gap-4">
             <div class="flex w-28 h-28 flex-shrink-0 rounded-md">
-                <img :src="data.imageUrl" class="object-cover w-full h-full rounded-md" :alt="data.name" />
+                <img :src="data?.imageUrl" class="object-cover w-full h-full rounded-md" :alt="data?.name" />
             </div>
             <div class="flex-1">
-                <h5 class="font-semibold text-xl text-gray-900 hover:text-gray-600">{{ data.name }}</h5>
-                <p class="text-gray-500 text-xs mt-2 truncate-text">{{ data.description }}</p>
+                <h5 class="font-semibold text-xl text-gray-900 hover:text-gray-600">{{ data?.name }}</h5>
+                <p class="text-gray-500 text-xs mt-2 truncate-text">{{ data?.description }}</p>
                 <div class="mt-4">
                     <h5 class="text-gray-800 text-2xl font-bold">
                         <span class="text-base font-semibold text-gray-600">$</span>
-                        {{ data.price }}
+                        {{ data?.price }}
                     </h5>
                 </div>
             </div>
@@ -29,12 +29,12 @@
             </div> -->
             <div class="flex gap-3 divide-x divide-gray-400">
                 <button type="button" class="border-none text-sm text-gray-600 flex items-center" @click="handleMod(menu, 'edit')">
-                    <PencilSquareIcon class="w-5 h-6 text-blue-500" />
+                    <PencilSquareIcon class="w-4 h- text-green-500 mr-1" />
                     Edit
                 </button>
                 <span></span>
                 <button type="button" class="border-none text-sm text-gray-600 flex items-center" @click="handleMod(menu, 'delete')">
-                    <TrashIcon class="w-5 h-6 text-red-500" />
+                    <TrashIcon class="w-4 h-4 text-red-500 mr-1" />
                     Delete
                 </button>
             </div>
@@ -43,11 +43,10 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, reactive, onMounted } from "vue";
-import { useModalStore } from '../store/modal';
+import { ref, onMounted, computed } from "vue";
+import { useModalStore } from "../store/modal";
 
-
-import { Switch, SwitchGroup, SwitchLabel } from "@headlessui/vue";
+// import { Switch, SwitchGroup, SwitchLabel } from "@headlessui/vue";
 import PencilSquareIcon from "../asset/PencilSquareIcon.vue";
 import TrashIcon from "../asset/TrashIcon.vue";
 
@@ -58,18 +57,17 @@ const props = defineProps<{
 }>();
 
 const store = useModalStore(); // initialize store
-const { updateForm, toggleModal } = store
+const { updateForm, toggleModal } = store;
 
-const data = ref<IMealDetails>(props.menu);
+const data = computed<IMealDetails>(() => props.menu);
 
 function handleMod(body: IMealDetails, action: string) {
-	// update form and set action type
-	store.action = action
-	updateForm(body)
-	// toggle modal
-	toggleModal()
-
+    // update form and set action type
+    store.action = action;
+    updateForm(body);
+    // toggle modal
+    toggleModal();
 }
 
-onMounted(() => console.log('mounted'))
+// onMounted(() => (data.value = props.menu));
 </script>

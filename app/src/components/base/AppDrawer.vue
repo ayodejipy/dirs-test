@@ -40,6 +40,7 @@ import { ref } from "vue";
 import { storeToRefs } from 'pinia'
 import { useModalStore } from "../../store/modal";
 import { TransitionRoot, TransitionChild, Dialog, DialogPanel, DialogTitle } from "@headlessui/vue";
+import XMarkIcon from '../../asset/XMarkIcon.vue'
 
 const store = useModalStore(); // initialize store
 const { toggleModal } = store
