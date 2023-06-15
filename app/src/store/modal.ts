@@ -53,21 +53,25 @@ export const useModalStore = defineStore("modal", () => {
         } finally {
             request.loading = false;
         }
-    }
+	}
+	
+	function clearForm() {
+        const excludedKeys = ["_id", "_Changed", "_Created"]; // Keys to be excluded from clearing
 
-    function clearForm() {
-        // get object keys
-        const formKeys = Object.keys(form.value);
-
-        // loop through form keys and set values as empty string
-        for (const key of formKeys) {
-            console.log(key);
-            if (key == "isAvailable") form.value[key] = false;
-            form.value[key] = "";
+        // Loop through each key in the form object
+        for (const key in form.value) {
+            if (!excludedKeys.includes(key)) {
+                // Set empty string for non-excluded keys
+                form.value[key] = "";
+            }
         }
+
+        form.value.isAvailable = false; // Set isAvailable to false
         // removed keys not needed
-        const { _id, _Changed, _Created, ..._oldForm } = form.value as unknown as IMealDetails;
-        form.value = { ..._oldForm };
+        // Remove excluded keys from form.value
+        for (const key of excludedKeys) {
+            delete form.value[key];
+        }
     }
 
     return { isOpen, action, request, form, menus, updateForm, clearForm, toggleModal, fetchMenus };
