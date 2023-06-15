@@ -16,7 +16,7 @@ const props = defineProps<{
     name: string;
     label: string;
     placeholder: string;
-    modelValue: string;
+    modelValue: string | undefined;
 }>();
 
 const emits = defineEmits(["update:modelValue"]);

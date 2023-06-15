@@ -1,4 +1,11 @@
-export interface IMealDetails {
+interface GeneralObject {
+    [key: string]: string | boolean;
+}
+
+export interface IMealDetails extends GeneralObject {
+    _id: string;
+    _Changed: string;
+    _Created: string;
     name: string;
     imageUrl: string;
     description: string;
@@ -6,18 +13,15 @@ export interface IMealDetails {
     mealTime: string;
     price: string;
     waitingTime: string;
-	isAvailable: boolean;
-	_id: string | null;
-	_Changed: string | null;
-	_Created: string | null;
+    isAvailable: boolean;
 }
 
-export interface MetaData {
-    _id: string;
-	_Changed: string;
-	_Created: string;
-}
+// export interface MetaData {
+//     _id: string;
+// 	_Changed: string;
+// 	_Created: string;
+// }
 
 export interface MenusByCategory {
-	[key: string]: IMealDetails[]
+    [key: string]: IMealDetails[];
 }
