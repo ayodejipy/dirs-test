@@ -65,7 +65,7 @@ export const useModalStore = defineStore('modal', () => {
 
 	function clearForm() {
 		for (let key in form) {
-			if(key == 'isAvailable') return form[key] = false
+			if(key == 'isAvailable') form[key] = false
 			form[key as unknown as typeof IMealDetails] = "";
 		}
 	}
