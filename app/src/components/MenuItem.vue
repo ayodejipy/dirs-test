@@ -43,7 +43,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted, computed } from "vue";
+import { ref, computed } from "vue";
 import { useModalStore } from "../store/modal";
 
 // import { Switch, SwitchGroup, SwitchLabel } from "@headlessui/vue";

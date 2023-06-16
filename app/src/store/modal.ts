@@ -66,9 +66,9 @@ export const useModalStore = defineStore("modal", () => {
             }
         }
 
-        form.value.isAvailable = false; // Set isAvailable to false
+		form.value.isAvailable = false; // Set isAvailable to false
+		
         // removed keys not needed
-        // Remove excluded keys from form.value
         for (const key of excludedKeys) {
             delete form.value[key];
         }
