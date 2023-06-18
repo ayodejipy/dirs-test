@@ -1,20 +1,22 @@
 import { ref } from "vue";
 import type { Meta, StoryObj } from "@storybook/vue3";
 
-import InputField from "../components/base/InputField.vue";
+import InputField from "../../components/base/InputField.vue";
 
 const meta: Meta<typeof InputField> = {
     title: "Components/InputField",
     component: InputField,
     //👇 Enables auto-generated documentation for the component story
     tags: ["autodocs"],
-    argTypes: {
-        required: {},
-    },
     args: {
         type: "text",
         required: false,
         placeholder: "Provide an input here",
+    },
+    argTypes: {
+        type: { control: 'text'},
+        required: { control: 'boolean' },
+        placeholder: { control: 'text' }
     },
 };
 
@@ -34,7 +36,6 @@ export const TextInputField: Story = {
         components: { InputField },
         setup() {
             const model = ref<string>("");
-
             const updateInput = (event: string) => (model.value = event);
 
             return { args, model, updateInput };

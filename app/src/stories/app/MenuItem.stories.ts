@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/vue3";
 
 import MenuItem from "../../components/MenuItem.vue";
+import { IMealDetails } from "../../utils/types";
 
-const meta: Meta = {
+const meta: Meta<typeof MenuItem> = {
 	title: "Components/MenuItem",
 	component: MenuItem,
 	tags: ["autodocs"],
@@ -32,8 +33,8 @@ export const Default: Story = {
 export const OutOfStock: Story = {
 	args: {
 		menu: {
-			...Default?.args?.menu,
+			...Default.args?.menu,
 			isAvailable: false,
-		}
+		} as IMealDetails
 	}
 }

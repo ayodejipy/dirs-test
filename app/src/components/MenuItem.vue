@@ -28,15 +28,13 @@
                 </SwitchGroup>
             </div> -->
             <div class="flex gap-3 divide-x divide-gray-400">
-                <button type="button" class="border-none text-sm text-gray-600 flex items-center" @click="handleMod(menu, 'edit')">
+                <TheButton text="Edit" @click="handleMod(menu, 'edit')">
                     <PencilSquareIcon class="w-4 h- text-green-500 mr-1" />
-                    Edit
-                </button>
+                </TheButton>
                 <span></span>
-                <button type="button" class="border-none text-sm text-gray-600 flex items-center" @click="handleMod(menu, 'delete')">
+                <TheButton text="Delete" @click="handleMod(menu, 'delete')">
                     <TrashIcon class="w-4 h-4 text-red-500 mr-1" />
-                    Delete
-                </button>
+                </TheButton>
             </div>
         </div>
     </li>
@@ -49,6 +47,7 @@ import { useModalStore } from "../store/modal";
 // import { Switch, SwitchGroup, SwitchLabel } from "@headlessui/vue";
 import PencilSquareIcon from "../asset/PencilSquareIcon.vue";
 import TrashIcon from "../asset/TrashIcon.vue";
+import TheButton from "./base/TheButton.vue";
 
 import { IMealDetails } from "../utils/types";
 

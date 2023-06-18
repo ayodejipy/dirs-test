@@ -8,7 +8,7 @@ import '../src/asset/main.css';
 
 // register global pinia instance
 setup((app) => {
-  app.use(createPinia);
+  app.use(createPinia());
 })
 
 const preview: Preview = {
