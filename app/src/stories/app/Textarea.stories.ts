@@ -15,6 +15,7 @@ const meta: Meta<typeof TextareaField> = {
 		cols: { control: "text" },
 		required: { control: "boolean" },
         label: { control: "text" },
+        name: { control: "text" },
         placeholder: { control: "text" },
         "onUpdate:modelValue": { action: "input" },
     },

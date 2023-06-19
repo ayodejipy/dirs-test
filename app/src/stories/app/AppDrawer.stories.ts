@@ -26,7 +26,7 @@ export const Default: Story = {
         },
         template: `<AppDrawer v-bind="args">
 			<template v-slot:default>
-				<AddMenuDrawer />
+				<h3>SLOT CONTENT</h3>
 			</template>
 		</AppDrawer>`,
 	}),

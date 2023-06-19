@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/vue3";
 
-import { userEvent, within } from '@storybook/testing-library';
+import { userEvent, within, screen } from '@storybook/testing-library';
 
 import AddMenuDrawer from "../../components/AddMenuDrawer.vue";
 
@@ -32,21 +32,22 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {};
 
 export const withFilledForm: Story = {
-	play: async ({ canvasElement }) => { 
-		const canvas = within(canvasElement)
+	play: async ({ canvasElement}) => { 
+		const selectCategory = screen.getByTestId('meal-category')
+		const selectMealTime = screen.getByTestId('meal-time')
 
-		await userEvent.type(canvas.getByTestId('meal-name'), 'Meal name', { delay: 100 })
-		await userEvent.type(canvas.getByTestId('meal-image'), 'Image URL', { delay: 100 })
-		await userEvent.type(canvas.getByTestId('meal-description'), 'Meal description', { delay: 100 })
-		await userEvent.type(canvas.getByTestId('meal-category'), 'main', { delay: 100 })
-		await userEvent.type(canvas.getByTestId('meal-time'), 'breakfast', { delay: 100 })
-		await userEvent.type(canvas.getByTestId('meal-price'), '30', { delay: 100 })
-		await userEvent.type(canvas.getByTestId('meal-waitTime'), '20', { delay: 100 })
+		await userEvent.type(screen.getByTestId('meal-name'), 'Noodles', { delay: 100 })
+		await userEvent.type(screen.getByTestId('meal-image'), 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8fA%3D%3D&w=1000&q=80', { delay: 100 })
+		await userEvent.type(screen.getByTestId('meal-description'), 'Meal description', { delay: 100 })
+		userEvent.selectOptions(selectCategory, ['main'])
+		userEvent.selectOptions(selectMealTime, ['Breakfast'])
+		await userEvent.type(screen.getByTestId('meal-price'), '30', { delay: 100 })
+		await userEvent.type(screen.getByTestId('meal-waitTime'), '20', { delay: 100 })
 
-		await userEvent.type(canvas.getByRole('switch'), 'true', { delay: 100 })
+		// await userEvent.type(canvas.getByRole('switch'), 'true', { delay: 100 })
 
 		// submit form
-		const submitButton = canvas.getByRole('button');
+		const submitButton = await screen.getByRole('submit');
 		await userEvent.click(submitButton)
 
 	}

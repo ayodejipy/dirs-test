@@ -38,8 +38,8 @@
                 </SelectField>
 
                 <div class="flex gap-4">
-                    <InputField name="wait-time" v-model="form.waitingTime" type="text" placeholder="approx waiting period" label="Processing time (Mins)" />
-                    <InputField name="price" v-model="form.price" type="text" placeholder="price" label="Price" />
+                    <InputField name="meal-waitTime" v-model="form.waitingTime" type="text" placeholder="approx waiting period" label="Processing time (Mins)" />
+                    <InputField name="meal-price" v-model="form.price" type="text" placeholder="price" label="Price" />
                 </div>
 
                 <div>
@@ -54,7 +54,7 @@
                 </div>
 
                 <div class="mt-10">
-                    <button type="submit" role="button" class="bg-blue-600 text-white hover:bg-blue-700 border-none rounded-none py-3 text-center w-full" :disabled="request.loading">
+                    <button type="submit" role="submit" class="bg-blue-600 text-white hover:bg-blue-700 border-none rounded-none py-3 text-center w-full" :disabled="request.loading">
                         {{ request.loading ? "loading..." : buttonText }}
                     </button>
                 </div>
