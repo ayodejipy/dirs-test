@@ -2,7 +2,7 @@
     <fieldset class="flex flex-col w-full">
         <label v-if="label" :for="name" class="text-gray-700 text-sm font-medium leading-6">{{ label }}</label>
 
-        <select :id="name" :name="name" :value="modelValue" @input="onChange" class="relative w-full px-4 border border-gray-400 appearance-none text-gray-800 text-xs h-12">
+        <select :data-testid="name" :name="name" :value="modelValue" @input="onChange" class="relative w-full px-4 border border-gray-400 appearance-none text-gray-800 text-xs h-12">
             <option value="" disabled selected>{{ placeholder }}</option>
             <slot></slot>
         </select>

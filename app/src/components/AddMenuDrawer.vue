@@ -23,9 +23,9 @@
 
         <template v-else>
             <form @submit.prevent="submitForm" class="mt-10 flex flex-col gap-4 px-4">
-                <InputField v-model="form.name" type="text" placeholder="meal name" label="Meal name" />
-                <InputField v-model="form.imageUrl" type="text" placeholder="meal image" label="Meal image" />
-                <TextareaField v-model="form.description" placeholder="some description about meal" label="Description" />
+                <InputField name="meal-name" v-model="form.name" type="text" placeholder="meal name" label="Meal name" />
+                <InputField name="meal-image" v-model="form.imageUrl" type="text" placeholder="meal image" label="Meal image" />
+                <TextareaField name="meal-description" v-model="form.description" placeholder="some description about meal" label="Description" />
                 <SelectField v-model="form.mealCategory" name="meal-category" placeholder="select meal category" label="Select meal category">
                     <option v-for="category in categories" :key="category.sub" :value="category.sub">
                         {{ category.title }}
@@ -38,8 +38,8 @@
                 </SelectField>
 
                 <div class="flex gap-4">
-                    <InputField v-model="form.waitingTime" type="text" placeholder="approx waiting period" label="Processing time (Mins)" />
-                    <InputField v-model="form.price" type="text" placeholder="price" label="Price" />
+                    <InputField name="wait-time" v-model="form.waitingTime" type="text" placeholder="approx waiting period" label="Processing time (Mins)" />
+                    <InputField name="price" v-model="form.price" type="text" placeholder="price" label="Price" />
                 </div>
 
                 <div>
@@ -54,7 +54,7 @@
                 </div>
 
                 <div class="mt-10">
-                    <button type="submit" class="bg-blue-600 text-white hover:bg-blue-700 border-none rounded-none py-3 text-center w-full" :disabled="request.loading">
+                    <button type="submit" role="button" class="bg-blue-600 text-white hover:bg-blue-700 border-none rounded-none py-3 text-center w-full" :disabled="request.loading">
                         {{ request.loading ? "loading..." : buttonText }}
                     </button>
                 </div>

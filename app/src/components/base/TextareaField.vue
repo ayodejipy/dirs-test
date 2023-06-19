@@ -1,7 +1,7 @@
 <template>
     <div class="w-full">
         <label :for="label" class="block text-sm font-medium leading-6 text-gray-700">{{ label }}</label>
-        <textarea :rows="rows" :cols="cols" :value="modelValue" :required="required" :placeholder="placeholder" @input="onChange" class="w-full text-gray-800 border border-gray-400 outline-0 p-2 text-xs font-normal placeholder placeholder:transition placeholder:duration-300 focus:border-gray-500 resize-none"></textarea>
+        <textarea :data-testid="name" :name="name" :rows="rows" :cols="cols" :value="modelValue" :required="required" :placeholder="placeholder" @input="onChange" class="w-full text-gray-800 border border-gray-400 outline-0 p-2 text-xs font-normal placeholder placeholder:transition placeholder:duration-300 focus:border-gray-500 resize-none"></textarea>
     </div>
 </template>
 
@@ -9,6 +9,11 @@
 const emit = defineEmits(["update:modelValue"]);
 
 const props = defineProps({
+    name: {
+        type: String,
+        default: "",
+        required: true
+    },
     rows: {
         type: String,
         default: "5",
